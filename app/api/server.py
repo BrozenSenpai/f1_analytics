@@ -1,12 +1,9 @@
 from flask import Flask, jsonify
 from pymongo import MongoClient
-from flask_cors import CORS
 
 from config import mongo_access
 
 app = Flask(__name__)
-
-# CORS(app, resources={r"/api*": {"origins": ["http://f1analytics-app:5012"]}})
 
 
 client = MongoClient(mongo_access)
