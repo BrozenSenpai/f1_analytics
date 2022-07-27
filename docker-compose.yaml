@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  cron:
+    build: ./etl/cron_part
+    container_name: f1analytics-cron
+    volumes:
+      - sqlite-data:/etl/db
+    depends_on:
+      - "webhook"
+  webhook:
+    build: ./etl/webhook_part
+    container_name: f1analytics-webhook
+    ports:
+      - 5010:5010
+    environment:
+      - MONGO_ACCESS=${MONGO_ACCESS}
+    volumes:
+      - sqlite-data:/etl/db
+    depends_on:
+      - "mongodb"
+  api:
+    build: ./app/api
+    container_name: f1analytics-api
+    ports:
+      - 5011:5011
+    environment:
+      - MONGO_ACCESS=${MONGO_ACCESS}
+    depends_on:
+      - "mongodb"
+  app:
+    build: ./app/web
+    container_name: f1analytics-app
+    ports:
+      - 5012:5012
+    depends_on:
+      - "api"
+    restart: unless-stopped
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${ROOT_NAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    restart: unless-stopped
+
+volumes:
+  mongodb-data:
+  sqlite-data:

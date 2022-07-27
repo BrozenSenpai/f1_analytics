@@ -1,0 +1,1 @@
+0 0,12 * * * cd /etl && sh checker.sh >> log.txt 2>&1
