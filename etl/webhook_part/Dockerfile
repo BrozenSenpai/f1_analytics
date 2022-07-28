@@ -6,6 +6,6 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY config.py utils.py data_wrangle.py webhook.py ./
+COPY config.py utils.py transform_load.py webhook.py ./
 
 ENTRYPOINT ["python", "webhook.py"]

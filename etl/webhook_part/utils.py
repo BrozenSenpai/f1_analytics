@@ -17,7 +17,6 @@ def mongo_config():
 
 
 # helper for repeatable inserting
-def bulk_insert(data, collection):
-    for x in data:
-        x = dict(x)
-        collection.update_one({"_id": x["_id"]}, {"$set": x}, upsert=True)
+def mongo_upsert(data, collection):
+    data = dict(data)
+    collection.update_one({"_id": data["_id"]}, {"$set": data}, upsert=True)

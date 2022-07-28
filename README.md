@@ -4,7 +4,7 @@
 The F1 Analytics is a portfolio project in the fields of data engineering and data visualization. The main goal of this project is to create a simple site for Formula 1 historical statistics overview, powered by data from [Ergast](https://ergast.com/mrd/) - an experimental web service that provides a historical record of motor racing data for non-commercial purposes. The second goal is just learning. 
 
 ## General architecture
-![architecture](https://user-images.githubusercontent.com/41913470/181354247-365c4b79-042f-49bd-8b07-96003900ec15.png)
+![architecture](https://user-images.githubusercontent.com/41913470/181359256-c4e6a6b5-eec8-418d-954c-e07ca54fa339.pn)
 
 The Ergast provides provide the data in the API and also a database images or CSV files form. This project uses files mainly because I have already created the [project](https://github.com/BrozenSenpai/yukinator) about the Ergast API. The second thing is that Ergast provides the data mostly for analytical purposes. It would be quite unfair to use their servers for my web app. To obtain the data files and store them in the SQLite3 database the bash script is running every 12 AM/PM (scheduled with CRON). It also checks if the data is updated, if so it sends the POST request to the webhook, which transforms the required data and upserts it into MongoDB. The data in the optimal form is served via API and accessed by a web app created with Dash. The WSGI Server used is the Gunicorn with 2 workers and 2 threads. The whole project is containerized using Docker with docker-compose.
 
@@ -57,5 +57,5 @@ To completely remove the project (including images and volumes) run:
 docker-compose down --rmi all -v
 ```
 **Warning**
+
 This docker-compose is not production ready. Before running it in the production environment please take care of the security.
-##

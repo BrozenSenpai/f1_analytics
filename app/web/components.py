@@ -8,7 +8,9 @@ import plotly.express as px
 
 
 seasons = [
-    x["Season"] for x in requests.get("http://f1analytics-api:5011/api/seasons").json()
+    x["Season"]
+    for x in requests.get("http://f1analytics-api:5011/api/seasons").json()
+    if x["Season"]
 ]
 
 now = seasons[0]
