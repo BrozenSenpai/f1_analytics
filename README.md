@@ -24,7 +24,7 @@ The following tools and technologies are used:
 To run this repo locally follow the steps listed below.
 
 ### Part 1
-Install and configure docker + docker_compose.
+Install and configure docker + docker-compose.
 
 ### Part 2
 In the directory top-most directory create *.env* file:
