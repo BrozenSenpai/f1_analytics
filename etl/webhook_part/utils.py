@@ -2,17 +2,17 @@ import sqlite3
 
 import pymongo
 
-from config import mongo_access
+from config import mongo_access, db_name
 
 # set connection with sqlite db
 def connect_db():
-    return sqlite3.connect(r"./db/f1db.db")
+    return sqlite3.connect(f"./db/f1db.db")
 
 
 # configure mongodb client
 def mongo_config():
     client = pymongo.MongoClient(mongo_access)
-    db = client.f1db
+    db = client[db_name]
     return db
 
 

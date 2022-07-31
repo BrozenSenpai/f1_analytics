@@ -14,6 +14,7 @@ services:
       - 5010:5010
     environment:
       - MONGO_ACCESS=${MONGO_ACCESS}
+      - DB_NAME=${DB_NAME}
     volumes:
       - sqlite-data:/etl/db
     depends_on:
@@ -25,6 +26,7 @@ services:
       - 5011:5011
     environment:
       - MONGO_ACCESS=${MONGO_ACCESS}
+      - DB_NAME=${DB_NAME}
     depends_on:
       - "mongodb"
   app:

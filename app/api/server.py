@@ -1,13 +1,13 @@
 from flask import Flask, jsonify
 from pymongo import MongoClient
 
-from config import mongo_access
+from config import mongo_access, db_name
 
 app = Flask(__name__)
 
 
 client = MongoClient(mongo_access)
-db = client.f1db
+db = client[db_name]
 
 
 # create endpoint for seasons data
