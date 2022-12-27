@@ -38,7 +38,7 @@ services:
       - "api"
     restart: unless-stopped
   mongodb:
-    image: mongo
+    image: mongo:5.0
     container_name: mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${ROOT_NAME}
